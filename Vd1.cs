@@ -28,109 +28,85 @@ public class BadSchoolProgram {
             System.out.println("99. Thoat");
             System.out.print("Nhap lua chon: ");
             menu = sc.nextInt(); sc.nextLine();
+// Xử lý menu quan ly sinh vien
+ if (menu == 1) {
+    int smenu = 0;
+    while (smenu != 9) {
+        System.out.println("--- QUAN LY SINH VIEN ---");
+        System.out.println("1. Them SV");
+        System.out.println("2. Xoa SV");
+        System.out.println("3. Cap nhat SV");
+        System.out.println("4. Hien thi tat ca SV");
+        System.out.println("5. Tim SV theo ten");
+        System.out.println("6. Tim SV GPA > 8");
+        System.out.println("7. Sap xep theo ten");
+        System.out.println("8. Sap xep theo GPA");
+        System.out.println("9. Quay lai");
 
-            if (menu == 1) {
-                // Quản lý sinh viên
-                int smenu = 0;
-                while (smenu != 9) {
-                    System.out.println("--- QUAN LY SINH VIEN ---");
-                    System.out.println("1. Them SV");
-                    System.out.println("2. Xoa SV");
-                    System.out.println("3. Cap nhat SV");
-                    System.out.println("4. Hien thi tat ca SV");
-                    System.out.println("5. Tim SV theo ten");
-                    System.out.println("6. Tim SV GPA > 8");
-                    System.out.println("7. Sap xep theo ten");
-                    System.out.println("8. Sap xep theo GPA");
-                    System.out.println("9. Quay lai");
-                    smenu = sc.nextInt(); sc.nextLine();
+        smenu = sc.nextInt();
+        sc.nextLine();
 
-                    if (smenu == 1) {
-                        System.out.print("Nhap id: ");
-                        String id = sc.nextLine();
-                        System.out.print("Nhap ten: ");
+        switch (smenu) {
+            case 1 -> {
+                System.out.print("Nhap id: ");
+                String id = sc.nextLine();
+                System.out.print("Nhap ten: ");
+                String name = sc.nextLine();
+                System.out.print("Nhap tuoi: ");
+                int age = sc.nextInt(); sc.nextLine();
+                System.out.print("Nhap GPA: ");
+                double gpa = sc.nextDouble(); sc.nextLine();
+                students.add(id + "|" + name + "|" + age + "|" + gpa);
+            }
+            case 2 -> {
+                System.out.print("Nhap id can xoa: ");
+                String id = sc.nextLine();
+                students.removeIf(s -> s.split("\\|")[0].equals(id));
+            }
+            case 3 -> {
+                System.out.print("Nhap id can cap nhat: ");
+                String id = sc.nextLine();
+                for (int i = 0; i < students.size(); i++) {
+                    String[] parts = students.get(i).split("\\|");
+                    if (parts[0].equals(id)) {
+                        System.out.print("Nhap ten moi: ");
                         String name = sc.nextLine();
-                        System.out.print("Nhap tuoi: ");
+                        System.out.print("Nhap tuoi moi: ");
                         int age = sc.nextInt(); sc.nextLine();
-                        System.out.print("Nhap GPA: ");
+                        System.out.print("Nhap GPA moi: ");
                         double gpa = sc.nextDouble(); sc.nextLine();
-                        students.add(id + "|" + name + "|" + age + "|" + gpa);
-                    } else if (smenu == 2) {
-                        System.out.print("Nhap id can xoa: ");
-                        String id = sc.nextLine();
-                        for (int i = 0; i < students.size(); i++) {
-                            String[] parts = students.get(i).split("\\|");
-                            if (parts[0].equals(id)) {
-                                students.remove(i);
-                                break;
-                            }
-                        }
-                    } else if (smenu == 3) {
-                        System.out.print("Nhap id can cap nhat: ");
-                        String id = sc.nextLine();
-                        for (int i = 0; i < students.size(); i++) {
-                            String[] parts = students.get(i).split("\\|");
-                            if (parts[0].equals(id)) {
-                                System.out.print("Nhap ten moi: ");
-                                String name = sc.nextLine();
-                                System.out.print("Nhap tuoi moi: ");
-                                int age = sc.nextInt(); sc.nextLine();
-                                System.out.print("Nhap GPA moi: ");
-                                double gpa = sc.nextDouble(); sc.nextLine();
-                                students.set(i, id + "|" + name + "|" + age + "|" + gpa);
-                            }
-                        }
-                    } else if (smenu == 4) {
-                        for (int i = 0; i < students.size(); i++) {
-                            String[] p = students.get(i).split("\\|");
-                            System.out.println("ID:" + p[0] + " Name:" + p[1] + " Age:" + p[2] + " GPA:" + p[3]);
-                        }
-                    } else if (smenu == 5) {
-                        System.out.print("Nhap ten: ");
-                        String name = sc.nextLine();
-                        for (int i = 0; i < students.size(); i++) {
-                            String[] p = students.get(i).split("\\|");
-                            if (p[1].equals(name)) {
-                                System.out.println("Tim thay: " + students.get(i));
-                            }
-                        }
-                    } else if (smenu == 6) {
-                        for (int i = 0; i < students.size(); i++) {
-                            String[] p = students.get(i).split("\\|");
-                            if (Double.parseDouble(p[3]) > 8.0) {
-                                System.out.println("Sinh vien gioi: " + students.get(i));
-                            }
-                        }
-                    } else if (smenu == 7) {
-                        for (int i = 0; i < students.size(); i++) {
-                            for (int j = 0; j < students.size() - 1; j++) {
-                                String[] p1 = students.get(j).split("\\|");
-                                String[] p2 = students.get(j + 1).split("\\|");
-                                if (p1[1].compareTo(p2[1]) > 0) {
-                                    String tmp = students.get(j);
-                                    students.set(j, students.get(j + 1));
-                                    students.set(j + 1, tmp);
-                                }
-                            }
-                        }
-                        System.out.println("Da sap xep theo ten.");
-                    } else if (smenu == 8) {
-                        for (int i = 0; i < students.size(); i++) {
-                            for (int j = 0; j < students.size() - 1; j++) {
-                                String[] p1 = students.get(j).split("\\|");
-                                String[] p2 = students.get(j + 1).split("\\|");
-                                if (Double.parseDouble(p1[3]) < Double.parseDouble(p2[3])) {
-                                    String tmp = students.get(j);
-                                    students.set(j, students.get(j + 1));
-                                    students.set(j + 1, tmp);
-                                }
-                            }
-                        }
-                        System.out.println("Da sap xep theo GPA.");
+                        students.set(i, id + "|" + name + "|" + age + "|" + gpa);
                     }
                 }
-
-            } else if (menu == 2) {
+            }
+            case 4 -> students.forEach(s -> {
+                String[] p = s.split("\\|");
+                System.out.println("ID:" + p[0] + " Name:" + p[1] + " Age:" + p[2] + " GPA:" + p[3]);
+            });
+            case 5 -> {
+                System.out.print("Nhap ten: ");
+                String name = sc.nextLine();
+                students.stream()
+                        .filter(s -> s.split("\\|")[1].equals(name))
+                        .forEach(s -> System.out.println("Tim thay: " + s));
+            }
+            case 6 -> students.stream()
+                    .filter(s -> Double.parseDouble(s.split("\\|")[3]) > 8.0)
+                    .forEach(s -> System.out.println("Sinh vien gioi: " + s));
+            case 7 -> {
+                students.sort((a, b) -> a.split("\\|")[1].compareTo(b.split("\\|")[1]));
+                System.out.println("Da sap xep theo ten.");
+            }
+            case 8 -> {
+                students.sort((a, b) ->
+                        Double.compare(Double.parseDouble(b.split("\\|")[3]),
+                                       Double.parseDouble(a.split("\\|")[3])));
+                System.out.println("Da sap xep theo GPA.");
+            }
+        }
+    }
+}
+ else if (menu == 2) {
                 // Quản lý giáo viên (copy-paste giống sinh viên nhưng khác field)
                 // BAD CODE: cực kỳ trùng lặp
                 int tmenu = 0;
