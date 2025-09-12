@@ -7,7 +7,7 @@ import java.util.*;
 public class BadSchoolProgram {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
+//comment
         // Danh sách dữ liệu: lưu sinh viên, giáo viên, môn học, đăng ký, điểm...
         ArrayList<String> students = new ArrayList<String>();
         ArrayList<String> teachers = new ArrayList<String>();
